@@ -86,6 +86,87 @@ export default class PropzClient extends ExternalClient {
   }
 
   // eslint-disable-next-line max-params
+  public async isPremiumClient(clientId: string) {
+    try {
+      return this.http.get(
+        `https://hml-apibic.farmaciaindiana.com.br/api/v2/customers/${clientId}?cpf=1`,
+        {
+          headers: {
+            'x-api-key':
+              '$2y$10$f6mnrySoOXxLwxpQ4xGt8OrlkLVNsV7UNUoVr.pVOm8ZWT6Wbx8z.',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+    } catch (error) {
+      return error
+    }
+  }
+
+  // eslint-disable-next-line max-params
+  public async updateAcceptsPremiumClient(clientId: string) {
+    try {
+      const response = await this.http.patch(
+        `https://hml-apibic.farmaciaindiana.com.br/api/v2/customers/${clientId}`,
+        { accepts: true },
+        {
+          headers: {
+            'x-api-key':
+              '$2y$10$f6mnrySoOXxLwxpQ4xGt8OrlkLVNsV7UNUoVr.pVOm8ZWT6Wbx8z.',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      return response
+    } catch (error) {
+      console.error('Erro ao atualizar cliente:', error)
+      throw error // ou retorne se preferir
+    }
+  }
+
+  // eslint-disable-next-line max-params
+  public async CreatePremiumClient(dadosnovocliente: string) {
+    const decoded = decodeURIComponent(dadosnovocliente) // Garante que esteja legível
+    const objDados = JSON.parse(decoded) // Agora você tem o objeto original
+
+    try {
+      const response = await this.http.post(
+        `https://hml-apibic.farmaciaindiana.com.br/api/v2/customers`,
+        {
+          cpf: objDados.cpf,
+          name: objDados.name,
+          street: objDados.street,
+          city: objDados.city,
+          neighborhood: objDados.neighborhood,
+          birthDate: objDados.birthDate,
+          genre: objDados.genre,
+          phone: objDados.phone,
+          number: objDados.number,
+          cep: objDados.cep,
+          email: objDados.email,
+          complement: objDados.complement,
+          uf: objDados.uf,
+          accepts: true,
+          legacyCode: objDados.cpf,
+        },
+        {
+          headers: {
+            'x-api-key':
+              '$2y$10$f6mnrySoOXxLwxpQ4xGt8OrlkLVNsV7UNUoVr.pVOm8ZWT6Wbx8z.',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      return response
+    } catch (error) {
+      console.error('Erro ao atualizar cliente:', error)
+      throw error // ou retorne se preferir
+    }
+  }
+
+  // eslint-disable-next-line max-params
   public async postVerifyPurchase(
     domain: string,
     token: string,

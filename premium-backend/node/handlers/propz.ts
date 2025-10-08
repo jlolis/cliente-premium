@@ -12,6 +12,12 @@ import { formatPrice } from '../utils/formatPriceVtex'
 import { spendAndGetMarketingData } from '../utils/spendAndGetMarketingData'
 import { createCollection } from '../utils/collection/createCollection'
 import { getPromotions } from '../utils/collection/getPromotions'
+import {
+  isPremium,
+  isPremiumCpf,
+  updateIsPremiumCpf,
+  createNewPremium,
+} from '../utils/collection/isPremium'
 import { getCollections } from '../utils/collection/getCollections'
 import { getProducts } from '../utils/collection/getProducts'
 import { updateCollections } from '../utils/collection/updateCollection'
@@ -347,6 +353,112 @@ export async function getPromotion(ctx: Context, next: () => Promise<any>) {
       query.showcase && query.showcase === 'true'
         ? { ...data, showcase: responsePromotionPropz, collections }
         : data
+  } catch (error) {
+    ctx.status = 400
+    ctx.body = error
+  }
+
+  ctx.set('cache-control', 'no-cache')
+  await next()
+}
+
+export async function getIsPremium(ctx: Context, next: () => Promise<any>) {
+  const {
+    clients: { Propz },
+  } = ctx
+
+  const { clientId } = ctx.query
+
+  const { query } = ctx.request
+
+  try {
+    const data = await isPremium(Propz, clientId)
+
+    ctx.status = 200
+    ctx.body = query.showcase && query.showcase === 'true' ? data : data
+
+    console.log('É premium? ', ctx.body)
+  } catch (error) {
+    ctx.status = 400
+    ctx.body = error
+  }
+
+  ctx.set('cache-control', 'no-cache')
+  await next()
+}
+
+export async function getIsPremiumCpf(ctx: Context, next: () => Promise<any>) {
+  const {
+    clients: { Propz },
+  } = ctx
+
+  const { clientId } = ctx.query
+
+  const { query } = ctx.request
+
+  try {
+    const data = await isPremiumCpf(Propz, clientId)
+
+    ctx.status = 200
+    ctx.body = query.showcase && query.showcase === 'true' ? data : data
+
+    console.log('É premium? ', ctx.body)
+  } catch (error) {
+    ctx.status = 400
+    ctx.body = error
+  }
+
+  ctx.set('cache-control', 'no-cache')
+  await next()
+}
+
+export async function setUpdateIsPremiumCpf(
+  ctx: Context,
+  next: () => Promise<any>
+) {
+  const {
+    clients: { Propz },
+  } = ctx
+
+  const { clientId } = ctx.query
+
+  const { query } = ctx.request
+
+  try {
+    const data = await updateIsPremiumCpf(Propz, clientId)
+
+    ctx.status = 200
+    ctx.body = query.showcase && query.showcase === 'true' ? data : data
+
+    console.log('Atualizou ', ctx.body)
+  } catch (error) {
+    ctx.status = 400
+    ctx.body = error
+  }
+
+  ctx.set('cache-control', 'no-cache')
+  await next()
+}
+
+export async function postCreateNewPremium(
+  ctx: Context,
+  next: () => Promise<any>
+) {
+  const {
+    clients: { Propz },
+  } = ctx
+
+  const { dadosnovocliente } = ctx.query
+
+  const { query } = ctx.request
+
+  try {
+    const data = await createNewPremium(Propz, dadosnovocliente)
+
+    ctx.status = 200
+    ctx.body = query.showcase && query.showcase === 'true' ? data : data
+
+    console.log('Cadastrou ', ctx.body)
   } catch (error) {
     ctx.status = 400
     ctx.body = error

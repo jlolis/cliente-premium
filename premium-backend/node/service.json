@@ -10,6 +10,22 @@
       "path": "/_v/get-promotion",
       "public": true
     },
+    "getIsPremium": {
+      "path": "/_v/get-ispremium",
+      "public": true
+    },
+    "getIsPremiumCpf": {
+      "path": "/_v/get-ispremium-id-by-cpf",
+      "public": true
+    },
+    "setUpdateIsPremiumCpf": {
+      "path": "/_v/update-accepts-ispremium",
+      "public": true
+    },
+    "postCreateNewPremium": {
+      "path": "/_v/create-premium",
+      "public": true
+    },
     "postPricePDP": {
       "path": "/_v/post-price-pdp",
       "public": true
