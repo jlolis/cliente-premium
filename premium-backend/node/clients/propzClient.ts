@@ -22,69 +22,6 @@ export default class PropzClient extends ExternalClient {
     }
   }
 
-  private getAuthHeader(username: string, password: string) {
-    return `Basic ${btoa(`${username}:${password}`)}`
-  }
-
-  // eslint-disable-next-line max-params
-  public async getPromotionShowCase(
-    domain: string,
-    token: string,
-    document: number,
-    username: string,
-    password: string,
-    storeId: string
-  ) {
-    const auth = this.getAuthHeader(username, password)
-
-    try {
-      return this.http.get(
-        `https://${domain}/v1/databases/${token}/retail/promotion-showcase/${document}?channel=ecom&storeId=${storeId}`,
-        {
-          metric: 'getPromotionShowcase',
-          nullIfNotFound: true,
-          headers: {
-            Authorization: auth,
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-    } catch (error) {
-      return error
-    }
-  }
-
-  // eslint-disable-next-line max-params
-  public async getAllPromotion(
-    domain: string,
-    token: string,
-    username: string,
-    password: string,
-    storeId: string,
-    page: number
-  ) {
-    const auth = this.getAuthHeader(username, password)
-
-    const limit = 100
-    const actialOffset = (page - 1) * limit
-
-    try {
-      return this.http.get(
-        `https://${domain}/v1/databases/${token}/retail/promotions?valid=true&limit=${limit}&offset=${actialOffset}&channel=ecom&storeId=${storeId}`,
-        {
-          metric: 'getAllPromotion',
-          nullIfNotFound: true,
-          headers: {
-            Authorization: auth,
-            'Content-Type': 'application/json',
-          },
-        }
-      )
-    } catch (error) {
-      return error
-    }
-  }
-
   // eslint-disable-next-line max-params
   public async isPremiumClient(clientId: string) {
     try {
@@ -113,6 +50,39 @@ export default class PropzClient extends ExternalClient {
           headers: {
             'x-api-key':
               '$2y$10$f6mnrySoOXxLwxpQ4xGt8OrlkLVNsV7UNUoVr.pVOm8ZWT6Wbx8z.',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      return response
+    } catch (error) {
+      console.error('Erro ao atualizar cliente:', error)
+      throw error // ou retorne se preferir
+    }
+  }
+
+  // eslint-disable-next-line max-params
+  public async sendZendeskForm(clientId: string) {
+    const auth = Buffer.from(
+      'joaoeduardo.lolis@corebiz.ag/token:rN776gmSXivGpAeUpoS4jAjLcUkAxnJl6svAxP6K'
+    ).toString('base64')
+
+    try {
+      const response = await this.http.post(
+        `https://corebizglobalsupport.zendesk.com/api/v2/tickets`,
+        {
+          ticket: {
+            comment: {
+              body: clientId,
+            },
+            priority: 'urgent',
+            subject: '2222My printer is on fire!',
+          },
+        },
+        {
+          headers: {
+            Authorization: `Basic ${auth}`,
             'Content-Type': 'application/json',
           },
         }
@@ -167,48 +137,23 @@ export default class PropzClient extends ExternalClient {
   }
 
   // eslint-disable-next-line max-params
-  public async postVerifyPurchase(
-    domain: string,
-    token: string,
-    username: string,
-    password: string,
-    itemsCart: any
-  ) {
-    const auth = this.getAuthHeader(username, password)
+  public async getAllPropzPromo(clientId: string) {
+    const username = '033e26d6-f21e-4028-a6a0-53e75a2f7776'
+    const password = '608ed2ff-9ee8-4c38-a32f-e3fd447b6f65'
+    const basicAuth = btoa(`${username}:${password}`) // Codifica em Base64
 
-    return this.http.post(
-      `https://${domain}/v1/databases/${token}/retail/pos/verify-purchase/v2`,
-      JSON.stringify(itemsCart),
-      {
-        metric: 'postVerifyPurchase',
-        headers: {
-          Authorization: auth,
-          'Content-Type': 'application/json',
-        },
-      }
-    )
-  }
-
-  // eslint-disable-next-line max-params
-  public async postRegisterPurchase(
-    domain: string,
-    token: string,
-    username: string,
-    password: string,
-    itemsCart: any
-  ) {
-    const auth = this.getAuthHeader(username, password)
-
-    return this.http.post(
-      `https://${domain}/v1/databases/${token}/retail/pos/register-purchase/v2`,
-      JSON.stringify(itemsCart),
-      {
-        metric: 'postRegisterPurchase',
-        headers: {
-          Authorization: auth,
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+    try {
+      return this.http.get(
+        `https://propzcloud.pzm.vc/v1/databases/0062bdd4-d728-466d-9396-92a8eea97f33/retail/promotion-showcase/${clientId}`,
+        {
+          headers: {
+            Authorization: `Basic ${basicAuth}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+    } catch (error) {
+      return error
+    }
   }
 }

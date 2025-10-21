@@ -59,6 +59,29 @@ export const updateIsPremiumCpf = async (Propz: any, clientId: string) => {
   }
 }
 
+export const zendeskForm = async (Propz: any, clientId: string) => {
+  if (!clientId) {
+    return 'envie o CPF como parametro após a URL ex: ?clientId=4'
+  }
+
+  try {
+    const response = await Propz.isPremiumClient(clientId)
+
+    if (response.data.id_cliente) {
+      // colocar chamada para update pelo id
+      const response2 = await Propz.sendZendeskForm(response.data.id_cliente)
+
+      return response2
+    }
+
+    return 'Erro no response.data.id_cliente'
+  } catch (error) {
+    console.error(error)
+
+    return error // quer dizer que não encontrou o cpf cadastrado
+  }
+}
+
 export const createNewPremium = async (
   Propz: any,
   dadosnovocliente: string
@@ -79,5 +102,21 @@ export const createNewPremium = async (
     console.error(error)
 
     return error // quer dizer que não encontrou o cpf cadastrado
+  }
+}
+
+export const allPromoPropz = async (Propz: any, clientId: string) => {
+  if (!clientId) {
+    return 'envie o CPF como parametro após a URL ex: ?clientId=4'
+  }
+
+  try {
+    const response = await Propz.getAllPropzPromo(clientId)
+
+    return response
+  } catch (error) {
+    console.error(error)
+
+    return 1000 // 1000 quer dizer que não encontrou o cpf cadastrado na base
   }
 }

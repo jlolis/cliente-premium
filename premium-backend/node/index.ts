@@ -5,15 +5,12 @@ import { LRUCache, Service, method } from '@vtex/api'
 
 import { Clients } from './clients'
 import {
-  postPricePDP,
-  getPromotion,
-  postRegisterPurchase,
-  postVerifyPurchase,
-  postBuildCollection,
   getIsPremium,
   getIsPremiumCpf,
   setUpdateIsPremiumCpf,
   postCreateNewPremium,
+  getAllPromoPropz,
+  setzendeskForm,
 } from './handlers/propz'
 
 // import { updateLiveUsers } from './event/liveUsersUpdate'
@@ -61,9 +58,6 @@ export default new Service<Clients, State, ParamsContext>({
      *       "showcase": "true"
      *   }
      */
-    getPromotion: method({
-      GET: [getPromotion],
-    }),
 
     getIsPremium: method({
       GET: [getIsPremium],
@@ -81,20 +75,12 @@ export default new Service<Clients, State, ParamsContext>({
       GET: [postCreateNewPremium],
     }),
 
-    postPricePDP: method({
-      POST: [postPricePDP],
+    getAllPromoPropz: method({
+      GET: [getAllPromoPropz],
     }),
 
-    postRegisterPurchase: method({
-      POST: [postRegisterPurchase],
-    }),
-
-    postVerifyPurchase: method({
-      POST: [postVerifyPurchase],
-    }),
-
-    postBuildCollection: method({
-      POST: [postBuildCollection],
+    setzendeskForm: method({
+      GET: [setzendeskForm],
     }),
   },
 })
