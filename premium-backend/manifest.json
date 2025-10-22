@@ -1,7 +1,7 @@
 {
   "name": "propz-backend",
   "vendor": "dmvfarma",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "title": "Propz Service",
   "description": "This app provides an Admin Interface for the configurations and a integration to the Propz services",
   "builders": {
@@ -10,7 +10,6 @@
   },
   "settingsSchema": {
     "title": "Propz",
-    "type": "object",
     "properties": {
       "domain": {
         "title": "Domínio",
@@ -70,6 +69,13 @@
   },
   "credentialType": "absolute",
   "policies": [
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "hml-apibic.farmaciaindiana.com.br",
+        "path": "/*"
+      }
+    },
     {
       "name": "outbound-access",
       "attrs": {

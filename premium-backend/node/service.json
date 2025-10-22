@@ -6,28 +6,24 @@
   "maxReplicas": 10,
   "workers": 4,
   "routes": {
-    "getPromotion": {
-      "path": "/_v/get-promotion",
+    "getIsPremium": {
+      "path": "/_v/get-ispremium",
       "public": true
     },
-    "postPricePDP": {
-      "path": "/_v/post-price-pdp",
+    "getIsPremiumCpf": {
+      "path": "/_v/get-ispremium-id-by-cpf",
       "public": true
     },
-    "postRegisterPurchase": {
-      "path": "/_v/post-register-purchase",
+    "setUpdateIsPremiumCpf": {
+      "path": "/_v/update-accepts-ispremium",
       "public": true
     },
-    "postVerifyPurchase": {
-      "path": "/_v/post-verify-purchase",
+    "postCreateNewPremium": {
+      "path": "/_v/create-premium",
       "public": true
     },
-    "postPriceManual": {
-      "path": "/_v/post-price-manual",
-      "public": true
-    },
-    "postBuildCollection": {
-      "path": "/_v/post-build-collection",
+    "getAllPromoPropz": {
+      "path": "/_v/get-allpromoproz",
       "public": true
     }
   }

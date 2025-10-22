@@ -1,22 +1,15 @@
 // node/index.ts
 // eslint-disable-next-line prettier/prettier
-import type {
-  ServiceContext,
-  ParamsContext,
-  RecorderState} from '@vtex/api';
-import {
-  LRUCache,
-  Service,
-  method,
-} from '@vtex/api'
+import type { ServiceContext, ParamsContext, RecorderState } from '@vtex/api'
+import { LRUCache, Service, method } from '@vtex/api'
 
 import { Clients } from './clients'
 import {
-  postPricePDP,
-  getPromotion,
-  postRegisterPurchase,
-  postVerifyPurchase,
-  postBuildCollection
+  getIsPremium,
+  getIsPremiumCpf,
+  setUpdateIsPremiumCpf,
+  postCreateNewPremium,
+  getAllPromoPropz,
 } from './handlers/propz'
 
 // import { updateLiveUsers } from './event/liveUsersUpdate'
@@ -64,24 +57,25 @@ export default new Service<Clients, State, ParamsContext>({
      *       "showcase": "true"
      *   }
      */
-    getPromotion: method({
-      GET: [getPromotion],
+
+    getIsPremium: method({
+      GET: [getIsPremium],
     }),
 
-    postPricePDP: method({
-      POST: [postPricePDP]
-    }),
-    
-    postRegisterPurchase: method({
-      "POST": [postRegisterPurchase]
+    getIsPremiumCpf: method({
+      GET: [getIsPremiumCpf],
     }),
 
-    postVerifyPurchase: method({
-      "POST": [postVerifyPurchase]
+    setUpdateIsPremiumCpf: method({
+      GET: [setUpdateIsPremiumCpf],
     }),
 
-    postBuildCollection: method({
-      "POST": [postBuildCollection]
-    })
+    postCreateNewPremium: method({
+      GET: [postCreateNewPremium],
+    }),
+
+    getAllPromoPropz: method({
+      GET: [getAllPromoPropz],
+    }),
   },
 })
