@@ -1,8 +1,8 @@
 {
-  "name": "propz-backend",
-  "vendor": "dmvfarma",
-  "version": "0.0.9",
-  "title": "Propz Service",
+  "name": "portal-premium",
+  "vendor": "farmaciaindiana",
+  "version": "1.0.0",
+  "title": "Corebiz Portal Premium",
   "description": "This app provides an Admin Interface for the configurations and a integration to the Propz services",
   "builders": {
     "node": "6.x",
