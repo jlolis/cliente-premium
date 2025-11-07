@@ -90,12 +90,12 @@ export async function setzendeskForm(ctx: Context, next: () => Promise<any>) {
     clients: { Propz },
   } = ctx
 
-  const { clientId } = ctx.query
+  const { assunto, comentario } = ctx.query
 
   const { query } = ctx.request
 
   try {
-    const data = await zendeskForm(Propz, clientId)
+    const data = await zendeskForm(Propz, assunto, comentario)
 
     ctx.status = 200
     ctx.body = query.showcase && query.showcase === 'true' ? data : data

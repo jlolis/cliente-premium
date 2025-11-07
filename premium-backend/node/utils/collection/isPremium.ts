@@ -1,6 +1,6 @@
 export const isPremium = async (Propz: any, clientId: string) => {
   if (!clientId) {
-    return 'envie o CPF como parametro após a URL ex: ?clientId=4'
+    return 'envie o CPF como parametro após a URL ex: ?clientId=1'
   }
 
   try {
@@ -20,7 +20,7 @@ export const isPremium = async (Propz: any, clientId: string) => {
 
 export const isPremiumCpf = async (Propz: any, clientId: string) => {
   if (!clientId) {
-    return 'envie o CPF como parametro após a URL ex: ?clientId=4'
+    return 'envie o CPF como parametro após a URL ex: ?clientId=2'
   }
 
   try {
@@ -36,7 +36,7 @@ export const isPremiumCpf = async (Propz: any, clientId: string) => {
 
 export const updateIsPremiumCpf = async (Propz: any, clientId: string) => {
   if (!clientId) {
-    return 'envie o CPF como parametro após a URL ex: ?clientId=4'
+    return 'envie o CPF como parametro após a URL ex: ?clientId=3'
   }
 
   try {
@@ -59,22 +59,19 @@ export const updateIsPremiumCpf = async (Propz: any, clientId: string) => {
   }
 }
 
-export const zendeskForm = async (Propz: any, clientId: string) => {
-  if (!clientId) {
-    return 'envie o CPF como parametro após a URL ex: ?clientId=4'
+export const zendeskForm = async (
+  Propz: any,
+  assunto: string,
+  comentario: string
+) => {
+  if (!assunto || !comentario) {
+    return 'envie os parametros após a URL: ?assunto="Assunto"&comentario="Comentario"'
   }
 
   try {
-    const response = await Propz.isPremiumClient(clientId)
+    const response2 = await Propz.sendZendeskForm(assunto, comentario)
 
-    if (response.data.id_cliente) {
-      // colocar chamada para update pelo id
-      const response2 = await Propz.sendZendeskForm(response.data.id_cliente)
-
-      return response2
-    }
-
-    return 'Erro no response.data.id_cliente'
+    return response2
   } catch (error) {
     console.error(error)
 
@@ -107,7 +104,7 @@ export const createNewPremium = async (
 
 export const allPromoPropz = async (Propz: any, clientId: string) => {
   if (!clientId) {
-    return 'envie o CPF como parametro após a URL ex: ?clientId=4'
+    return 'envie o CPF como parametro após a URL ex: ?clientId=5'
   }
 
   try {

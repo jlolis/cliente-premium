@@ -25,6 +25,10 @@
     "getAllPromoPropz": {
       "path": "/_v/get-allpromoproz",
       "public": true
+    },
+    "setzendeskForm": {
+      "path": "/_v/send-zendeskform",
+      "public": true
     }
   }
 }

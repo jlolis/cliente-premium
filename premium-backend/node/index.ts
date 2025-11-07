@@ -10,6 +10,7 @@ import {
   setUpdateIsPremiumCpf,
   postCreateNewPremium,
   getAllPromoPropz,
+  setzendeskForm,
 } from './handlers/propz'
 
 // import { updateLiveUsers } from './event/liveUsersUpdate'
@@ -76,6 +77,10 @@ export default new Service<Clients, State, ParamsContext>({
 
     getAllPromoPropz: method({
       GET: [getAllPromoPropz],
+    }),
+
+    setzendeskForm: method({
+      GET: [setzendeskForm],
     }),
   },
 })

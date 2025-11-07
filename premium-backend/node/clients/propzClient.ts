@@ -62,43 +62,48 @@ export default class PropzClient extends ExternalClient {
     }
   }
 
-  // eslint-disable-next-line max-params
-  public async sendZendeskForm(clientId: string) {
-    const auth = Buffer.from(
-      'joaoeduardo.lolis@corebiz.ag/token:rN776gmSXivGpAeUpoS4jAjLcUkAxnJl6svAxP6K'
-    ).toString('base64')
+  public async sendZendeskForm(assunto: string, comentario: string) {
+    const username = 'suporteti@farmaciaindiana.com.br'
+    const password = 'DINW7WgQSfXxMvTHlG3LeIv70ZOKTpsf3baSsym0'
+    const basicAuth = btoa(`${username}/token:${password}`)
 
     try {
       const response = await this.http.post(
-        `https://corebizglobalsupport.zendesk.com/api/v2/tickets`,
+        `https://farmaciaindiana.zendesk.com/api/v2/tickets/`,
         {
           ticket: {
             comment: {
-              body: clientId,
+              body: comentario,
             },
             priority: 'urgent',
-            subject: '2222My printer is on fire!',
+            subject: assunto,
           },
         },
         {
           headers: {
-            Authorization: `Basic ${auth}`,
             'Content-Type': 'application/json',
+            Authorization: `Basic ${basicAuth}`,
           },
         }
       )
 
-      return response
+      return {
+        success: true,
+        message: 'Ticket criado com sucesso!',
+        data: response,
+      }
     } catch (error) {
-      console.error('Erro ao atualizar cliente:', error)
-      throw error // ou retorne se preferir
+      return {
+        success: false,
+        message: `Erro ao criar ticket: ${error}`,
+      }
     }
   }
 
   // eslint-disable-next-line max-params
   public async CreatePremiumClient(dadosnovocliente: string) {
-    const decoded = decodeURIComponent(dadosnovocliente) // Garante que esteja legível
-    const objDados = JSON.parse(decoded) // Agora você tem o objeto original
+    const decoded = decodeURIComponent(dadosnovocliente)
+    const objDados = JSON.parse(decoded)
 
     try {
       const response = await this.http.post(
@@ -132,7 +137,7 @@ export default class PropzClient extends ExternalClient {
       return response
     } catch (error) {
       console.error('Erro ao atualizar cliente:', error)
-      throw error // ou retorne se preferir
+      throw error
     }
   }
 
@@ -140,7 +145,7 @@ export default class PropzClient extends ExternalClient {
   public async getAllPropzPromo(clientId: string) {
     const username = '033e26d6-f21e-4028-a6a0-53e75a2f7776'
     const password = '608ed2ff-9ee8-4c38-a32f-e3fd447b6f65'
-    const basicAuth = btoa(`${username}:${password}`) // Codifica em Base64
+    const basicAuth = btoa(`${username}:${password}`)
 
     try {
       return this.http.get(

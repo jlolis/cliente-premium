@@ -79,6 +79,13 @@
     {
       "name": "outbound-access",
       "attrs": {
+        "host": "farmaciaindiana.zendesk.com",
+        "path": "/*"
+      }
+    },
+    {
+      "name": "outbound-access",
+      "attrs": {
         "host": "propzcloud.pzm.in",
         "path": "/*"
       }
