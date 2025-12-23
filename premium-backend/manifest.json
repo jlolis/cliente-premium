@@ -80,7 +80,7 @@
     {
       "name": "outbound-access",
       "attrs": {
-        "host": "hml-apibic.farmaciaindiana.com.br",
+        "host": "apibic.farmaciaindiana.com.br",
         "path": "/*"
       }
     },

@@ -26,11 +26,11 @@ export default class PropzClient extends ExternalClient {
   public async isPremiumClient(clientId: string) {
     try {
       return this.http.get(
-        `https://hml-apibic.farmaciaindiana.com.br/api/v2/customers/${clientId}?cpf=1`,
+        `https://apibic.farmaciaindiana.com.br/api/v2/customers/${clientId}?cpf=1`,
         {
           headers: {
             'x-api-key':
-              '$2y$10$f6mnrySoOXxLwxpQ4xGt8OrlkLVNsV7UNUoVr.pVOm8ZWT6Wbx8z.',
+              '$2y$10$YjYFsdeNCBtZ1ZyCY6um.eVCGD4zlodMs0o6fJX9yOEFlx5zQmAOm',
             'Content-Type': 'application/json',
           },
         }
@@ -44,12 +44,12 @@ export default class PropzClient extends ExternalClient {
   public async updateAcceptsPremiumClient(clientId: string) {
     try {
       const response = await this.http.patch(
-        `https://hml-apibic.farmaciaindiana.com.br/api/v2/customers/${clientId}`,
+        `https://apibic.farmaciaindiana.com.br/api/v2/customers/${clientId}`,
         { accepts: true },
         {
           headers: {
             'x-api-key':
-              '$2y$10$f6mnrySoOXxLwxpQ4xGt8OrlkLVNsV7UNUoVr.pVOm8ZWT6Wbx8z.',
+              '$2y$10$YjYFsdeNCBtZ1ZyCY6um.eVCGD4zlodMs0o6fJX9yOEFlx5zQmAOm',
             'Content-Type': 'application/json',
           },
         }
@@ -107,7 +107,7 @@ export default class PropzClient extends ExternalClient {
 
     try {
       const response = await this.http.post(
-        `https://hml-apibic.farmaciaindiana.com.br/api/v2/customers`,
+        `https://apibic.farmaciaindiana.com.br/api/v2/customers`,
         {
           cpf: objDados.cpf,
           name: objDados.name,
@@ -128,7 +128,7 @@ export default class PropzClient extends ExternalClient {
         {
           headers: {
             'x-api-key':
-              '$2y$10$f6mnrySoOXxLwxpQ4xGt8OrlkLVNsV7UNUoVr.pVOm8ZWT6Wbx8z.',
+              '$2y$10$YjYFsdeNCBtZ1ZyCY6um.eVCGD4zlodMs0o6fJX9yOEFlx5zQmAOm',
             'Content-Type': 'application/json',
           },
         }
