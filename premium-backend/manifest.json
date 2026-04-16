@@ -1,7 +1,7 @@
 {
   "name": "portal-premium",
   "vendor": "farmaciaindiana",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "title": "Corebiz Portal Premium",
   "description": "This app provides an Admin Interface for the configurations and a integration to the Propz services",
   "builders": {
@@ -35,14 +35,8 @@
         "title": "Tipo de promoção",
         "description": "Selecione o tipo de promoção",
         "type": "string",
-        "enum": [
-          "PERSONALIZED",
-          "MASSIVE"
-        ],
-        "enumNames": [
-          "Personalizada",
-          "Personalizada/Massiva"
-        ],
+        "enum": ["PERSONALIZED", "MASSIVE"],
+        "enumNames": ["Personalizada", "Personalizada/Massiva"],
         "widget": {
           "ui:widget": "radio"
         }
@@ -70,9 +64,7 @@
       "email": "suporte@propz.com.br",
       "url": "https://propz.zendesk.com"
     },
-    "availableCountries": [
-      "*"
-    ],
+    "availableCountries": ["*"],
     "plans": []
   },
   "credentialType": "absolute",
