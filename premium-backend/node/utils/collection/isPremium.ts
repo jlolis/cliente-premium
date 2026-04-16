@@ -102,6 +102,26 @@ export const createNewPremium = async (
   }
 }
 
+export const updatePremium = async (Propz: any, dadosnovocliente: string) => {
+  if (!dadosnovocliente) {
+    return 'envie os dados como parametro sem espaços, caso precise utilizar o &nbsp após a URL ex: ?dadosnovocliente={"cpf":20099913038,"name":"TestePremium","birthDate":"1983-05-15","genre":"M","phone":"96994661747"}'
+  }
+
+  try {
+    const response = await Propz.UpdatePremiumClient(dadosnovocliente)
+
+    if (response) {
+      return response
+    }
+
+    return 'Erro no response.data.id_cliente'
+  } catch (error) {
+    console.error(error)
+
+    return error // quer dizer que não encontrou o cpf cadastrado
+  }
+}
+
 export const allPromoPropz = async (Propz: any, clientId: string) => {
   if (!clientId) {
     return 'envie o CPF como parametro após a URL ex: ?clientId=5'

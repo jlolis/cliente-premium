@@ -3,6 +3,7 @@ import {
   isPremiumCpf,
   updateIsPremiumCpf,
   createNewPremium,
+  updatePremium,
   allPromoPropz,
   zendeskForm,
 } from '../utils/collection/isPremium'
@@ -124,6 +125,34 @@ export async function postCreateNewPremium(
 
   try {
     const data = await createNewPremium(Propz, dadosnovocliente)
+
+    ctx.status = 200
+    ctx.body = query.showcase && query.showcase === 'true' ? data : data
+
+    // console.log('Cadastrou ', ctx.body)
+  } catch (error) {
+    ctx.status = 400
+    ctx.body = error
+  }
+
+  ctx.set('cache-control', 'no-cache')
+  await next()
+}
+
+export async function updatePremiumUser(
+  ctx: Context,
+  next: () => Promise<any>
+) {
+  const {
+    clients: { Propz },
+  } = ctx
+
+  const { dadosnovocliente } = ctx.query
+
+  const { query } = ctx.request
+
+  try {
+    const data = await updatePremium(Propz, dadosnovocliente)
 
     ctx.status = 200
     ctx.body = query.showcase && query.showcase === 'true' ? data : data

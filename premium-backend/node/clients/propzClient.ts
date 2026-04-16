@@ -41,6 +41,41 @@ export default class PropzClient extends ExternalClient {
   }
 
   // eslint-disable-next-line max-params
+  public async UpdatePremiumClient(dadosnovocliente: string) {
+    const decoded2 = decodeURIComponent(dadosnovocliente)
+    const objDadosupdate = JSON.parse(decoded2)
+
+    const responseupdate = await this.isPremiumClient(objDadosupdate.cpf)
+
+    const USER_ID = responseupdate.data.id_cliente
+
+    try {
+      const responseupdate2 = await this.http.patch(
+        `https://apibic.farmaciaindiana.com.br/api/v2/customers/${USER_ID}`,
+        {
+          cpf: objDadosupdate.cpf,
+          name: objDadosupdate.name,
+          birthDate: objDadosupdate.birthDate,
+          genre: objDadosupdate.genre,
+          phone: objDadosupdate.phone,
+        },
+        {
+          headers: {
+            'x-api-key':
+              '$2y$10$YjYFsdeNCBtZ1ZyCY6um.eVCGD4zlodMs0o6fJX9yOEFlx5zQmAOm',
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      return responseupdate2
+    } catch (error) {
+      console.error('Erro ao atualizar cliente:', error)
+      throw error
+    }
+  }
+
+  // eslint-disable-next-line max-params
   public async updateAcceptsPremiumClient(clientId: string) {
     try {
       const response = await this.http.patch(

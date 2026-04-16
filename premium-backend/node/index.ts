@@ -9,6 +9,7 @@ import {
   getIsPremiumCpf,
   setUpdateIsPremiumCpf,
   postCreateNewPremium,
+  updatePremiumUser,
   getAllPromoPropz,
   setzendeskForm,
 } from './handlers/propz'
@@ -73,6 +74,10 @@ export default new Service<Clients, State, ParamsContext>({
 
     postCreateNewPremium: method({
       GET: [postCreateNewPremium],
+    }),
+
+    updatePremiumUser: method({
+      GET: [updatePremiumUser],
     }),
 
     getAllPromoPropz: method({

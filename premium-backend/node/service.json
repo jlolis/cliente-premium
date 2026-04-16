@@ -22,6 +22,10 @@
       "path": "/_v/create-premium",
       "public": true
     },
+    "updatePremiumUser": {
+      "path": "/_v/premium-update-user",
+      "public": true
+    },
     "getAllPromoPropz": {
       "path": "/_v/get-allpromoproz",
       "public": true
