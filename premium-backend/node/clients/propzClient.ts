@@ -41,6 +41,19 @@ export default class PropzClient extends ExternalClient {
   }
 
   // eslint-disable-next-line max-params
+  public async isChangeClient(clientId: string) {
+    try {
+      const resp = await this.http.get(
+        `http://${this.context.account}.vtexcommercestable.com.br/api/dataentities/CL/search?_where=email=${clientId}&_fields=_all`
+      )
+
+      return resp.data
+    } catch (error) {
+      return error
+    }
+  }
+
+  // eslint-disable-next-line max-params
   public async UpdatePremiumClient(dadosnovocliente: string) {
     const decoded2 = decodeURIComponent(dadosnovocliente)
     const objDadosupdate = JSON.parse(decoded2)

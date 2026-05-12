@@ -34,6 +34,22 @@ export const isPremiumCpf = async (Propz: any, clientId: string) => {
   }
 }
 
+export const isChange = async (Propz: any, clientId: string) => {
+  if (!clientId) {
+    return 'envie o CPF como parametro após a URL ex: ?clientId=2'
+  }
+
+  try {
+    const response = await Propz.isChangeClient(clientId)
+
+    return response.data.id_cliente
+  } catch (error) {
+    console.error(error)
+
+    return error // quer dizer que não encontrou o cpf cadastrado
+  }
+}
+
 export const updateIsPremiumCpf = async (Propz: any, clientId: string) => {
   if (!clientId) {
     return 'envie o CPF como parametro após a URL ex: ?clientId=3'

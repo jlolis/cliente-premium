@@ -1,6 +1,7 @@
 import {
   isPremium,
   isPremiumCpf,
+  isChange,
   updateIsPremiumCpf,
   createNewPremium,
   updatePremium,
@@ -44,6 +45,31 @@ export async function getIsPremiumCpf(ctx: Context, next: () => Promise<any>) {
 
   try {
     const data = await isPremiumCpf(Propz, clientId)
+
+    ctx.status = 200
+    ctx.body = query.showcase && query.showcase === 'true' ? data : data
+
+    // console.log('É premium? ', ctx.body)
+  } catch (error) {
+    ctx.status = 400
+    ctx.body = error
+  }
+
+  ctx.set('cache-control', 'no-cache')
+  await next()
+}
+
+export async function getChanges(ctx: Context, next: () => Promise<any>) {
+  const {
+    clients: { Propz },
+  } = ctx
+
+  const { clientId } = ctx.query
+
+  const { query } = ctx.request
+
+  try {
+    const data = await isChange(Propz, clientId)
 
     ctx.status = 200
     ctx.body = query.showcase && query.showcase === 'true' ? data : data

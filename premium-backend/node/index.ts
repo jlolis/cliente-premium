@@ -7,6 +7,7 @@ import { Clients } from './clients'
 import {
   getIsPremium,
   getIsPremiumCpf,
+  getChanges,
   setUpdateIsPremiumCpf,
   postCreateNewPremium,
   updatePremiumUser,
@@ -66,6 +67,10 @@ export default new Service<Clients, State, ParamsContext>({
 
     getIsPremiumCpf: method({
       GET: [getIsPremiumCpf],
+    }),
+
+    getChanges: method({
+      GET: [getChanges],
     }),
 
     setUpdateIsPremiumCpf: method({
